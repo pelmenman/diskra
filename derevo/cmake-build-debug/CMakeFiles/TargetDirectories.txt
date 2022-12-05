@@ -1,0 +1,3 @@
+C:/Users/User/Desktop/c++/derevo/cmake-build-debug/CMakeFiles/derevo.dir
+C:/Users/User/Desktop/c++/derevo/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/User/Desktop/c++/derevo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
