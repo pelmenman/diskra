@@ -1,40 +1,39 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
-vector<vector<int>> enemies;
-vector<bool> visited;
-vector<int> mark;
-int numPeople;
-bool can = true;
 
-
-void dfs(int node){
-    visited[node] = true;
-
-    for (int i : enemies[node]) {
-        if (mark[node] == mark[i]) {
-            can = false;
-        } else {
-            if ()
+void dfs(int g,bool &flag,vector <int> &color,vector <bool> &upd,vector <vector <int> > &spis){
+    upd[g]=false;
+    int clr =(color[g]-3)*(-1);
+    for(int i = 0;i<spis[g].size();i++){
+        if(color[spis[g][i]] == color[g]){
+            flag = false;
         }
+        else color[spis[g][i]] = clr;
+    }
+    for(int i = 0;i<spis[g].size();i++){
+        if(upd[spis[g][i]]) dfs(spis[g][i],flag,color,upd,spis);
     }
 }
-
-int main() {
-    int numEnemies;
-    cin >> numPeople >> numEnemies;
-    enemies.resize(numPeople);
-    visited.resize(numPeople, false);
-    mark.resize(numPeople);
-
-    for (int i = 0; i < numEnemies; i++) {
-        int a, b; cin >> a >> b; a--; b--;
-        enemies[a].push_back(b);
-        enemies[b].push_back(a);
+int main(){
+    int n,m;
+    cin >> n >> m;
+    vector <vector <int> > a(n);
+    vector <bool> upd(n,true);
+    for (int i = 0;i < m;i++){
+        int p,q;
+        cin >> p >> q;
+        a[p-1].push_back(q-1);
+        a[q-1].push_back(p-1);
     }
-
-    dfs(0);
-
-    return 0;
+    bool flag = true;
+    vector <int> color(n);
+    for(int i = 0;i<n;i++){
+        if(upd[i]){
+            color[i] = 1;
+            dfs(i,flag,color,upd,a);
+        }
+    }
+    if (flag) cout << "YES";
+    else cout << "NO";
 }
